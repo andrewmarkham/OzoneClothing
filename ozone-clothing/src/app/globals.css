@@ -17,3 +17,43 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+@import '@jhoose-commerce/components/dist/components.css';
+
+/* override ozonze styles*/
+.productPrice .price {
+  font-size: var(--text-2xl);
+  line-height: var(--tw-leading, var(--text-2xl--line-height));
+
+  --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+}
+
+.productPrice .from {
+  color: var(--color-gray-600);
+}
+
+button.addToCart {
+  border-color: black !important; 
+  background-color: black !important;;
+  color: white !important;
+
+  border-radius: 0%;
+  
+}
+button.addToCart:disabled {
+  border-color: rgb(85, 84, 84) !important; 
+  background-color: rgb(85, 84, 84) !important;;
+  color: white !important;
+
+}
+
+button.addToCart span:first-of-type {
+  width:100%;
+  text-align: center;
+
+}
+button.addToCart span:last-of-type {
+  display: none;
+}

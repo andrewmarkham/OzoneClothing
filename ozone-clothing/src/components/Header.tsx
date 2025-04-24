@@ -1,10 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingBag, Heart, User, Search } from 'lucide-react';
+import { ShoppingBag, Search } from 'lucide-react';
+import { Drawer, MiniCart } from '@jhoose-commerce/components';
+import { useState } from 'react';
+import { Authentication } from './authentication';
 
-const Header = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Header = (props: { lang: string, labels: any }) => {
+    const [showMiniCart, setShowMiniCart] = useState(false);
+    const checkoutUrl = `/${props.lang}/checkout`
+
   return (
+    <>
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
       <div className="container mx-auto px-4">
         {/* Main header */}
@@ -12,20 +20,17 @@ const Header = () => {
           {/* Left section - Logo and Navigation */}
           <div className="flex items-center space-x-8">
             {/* Logo */}
-            <Link href="/" className="text-2xl font-bold">
+            <Link href={`/${props.lang}`} className="text-2xl font-bold">
               Ozone
             </Link>
             
             {/* Main Navigation */}
             <nav className="hidden md:flex space-x-6">
-              <Link href="/men" className="text-sm font-medium hover:text-gray-600">
+              <Link href={`/${props.lang}/products/mens`} className="text-sm font-medium hover:text-gray-600">
                 MEN
               </Link>
-              <Link href="/women" className="text-sm font-medium hover:text-gray-600">
+              <Link href={`/${props.lang}/products/womens`} className="text-sm font-medium hover:text-gray-600">
                 WOMEN
-              </Link>
-              <Link href="/kids" className="text-sm font-medium hover:text-gray-600">
-                KIDS
               </Link>
             </nav>
           </div>
@@ -47,19 +52,21 @@ const Header = () => {
             <button className="md:hidden">
               <Search className="h-6 w-6" />
             </button>
-            <Link href="/account" className="hover:text-gray-600">
-              <User className="h-6 w-6" />
-            </Link>
-            <Link href="/wishlist" className="hover:text-gray-600">
-              <Heart className="h-6 w-6" />
-            </Link>
-            <Link href="/cart" className="hover:text-gray-600">
+
+            <Authentication />
+ 
+            <button onClick={() => setShowMiniCart(!showMiniCart)}>
               <ShoppingBag className="h-6 w-6" />
-            </Link>
+          </button>
           </div>
         </div>
       </div>
     </header>
+
+    <Drawer heading={props.labels.minicart.heading} show={showMiniCart} close={() => setShowMiniCart(false)}>
+      <MiniCart show={showMiniCart} checkoutUrl={checkoutUrl}  labels={props.labels.minicart} />
+    </Drawer>
+  </>
   );
 };
 

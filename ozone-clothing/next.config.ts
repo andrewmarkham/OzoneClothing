@@ -12,6 +12,22 @@ const nextConfig: NextConfig = {
         protocol: 'http',
         hostname: 'localhost',
       },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'http',
+        hostname: 'ozone.api'
+      },
+      {
+        protocol: 'http',
+        hostname: '**'
+      }
     ],
   },
 };

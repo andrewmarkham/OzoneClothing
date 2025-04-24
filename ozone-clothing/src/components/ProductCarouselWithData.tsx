@@ -12,7 +12,7 @@ type ProductQueryType = (variables: {
 */
 export default function ProductCarouselWithData(props: {heading: string, marketId: string, parentCategory: string[], limit?: number}) {
 
-  const imagehost = 'http://localhost:5001/';
+  const imagehost = process.env.NEXT_PUBLIC_COMMERCE_ENDPOINT;
   const { data } = useQuery(ProductQuery, {
     variables: {
       market: props.marketId,
