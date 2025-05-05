@@ -22,9 +22,10 @@ export function ProductGallery({ images }: ProductGalleryProps) {
             onClick={() => setSelectedImage(index)}
           >
             <div className="relative w-full h-full">
-              <img
+              <Image
                 src={image}
                 alt={`Product view ${index + 1}`}
+                fill
                 className="object-cover"
               />
             </div>

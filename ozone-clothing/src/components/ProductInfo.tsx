@@ -10,6 +10,7 @@ import { VariantDetail } from '@/app/[lang]/(shop)/products/[...slug]/graphql/Va
 
 import { AddToCart, ProductSummaryContext, ProductSummaryContextType, useJhooseCommerce } from '@jhoose-commerce/components';
 
+
 interface ProductInfoProps {
     product: GenericProduct
 }
@@ -39,8 +40,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
     const items = data?.GenericVariant?.items;
     
-    console.log(items);
-
+    //console.log(items);
+    //console.log(marketContext);
     // This would typically fetch product data based on the ID
     const _product = {
         id: product.Code,
@@ -148,6 +149,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       <div className='flex flex-col grow'>
+        {selectedSku}
         <AddToCart sku={selectedSku} qty={quantity} text={"Add to Cart"} disabled={!selectedSku}  />
       </div>
     </div>

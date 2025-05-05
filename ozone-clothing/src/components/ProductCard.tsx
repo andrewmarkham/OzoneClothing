@@ -1,7 +1,7 @@
-
 'use client'
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProductCardProps {
@@ -28,9 +28,10 @@ export default function ProductCard({ id, name, price, images, slug }: ProductCa
   return (
     <Link href={`${slug}`} className="group relative block" data-product-id={id}>
       <div className="relative aspect-square overflow-hidden rounded-lg">
-        <img
+        <Image
           src={images[currentImageIndex]}
           alt={name}
+          fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />

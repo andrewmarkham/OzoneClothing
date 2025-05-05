@@ -19,7 +19,7 @@ export const CategoryAndProducts = (props: CategoryAndProductsProps) => {
         <div dangerouslySetInnerHTML={{ __html: props.currentNode?.Description ?? "" }}></div>
       </div>
       <div className="w-full">
-        <CategoryFilters categories={props.genericNodes as GenericNode[]} />
+        <CategoryFilters lang={props.lang} categories={props.genericNodes as GenericNode[]} />
       </div>
       <div>
         <p className="text-right mb-2">Total: {props.genericProducts.length}</p>
@@ -33,7 +33,7 @@ export const CategoryAndProducts = (props: CategoryAndProductsProps) => {
               name: item?.DisplayName ?? '',
               price: item?.LowestPriceOfVariationPerMarket?.find(i => i?.MarketName === props.market.market)?.Price || 0,
               images: [`${imagehost}${item?.DefaultImageUrl ?? ''}`], // You might want to fetch additional images
-              slug: item?.RelativePath ?? ''
+              slug: `/${props.lang}${item?.RelativePath ?? ''}`
             };
             return (
               <ProductCard key={index} {...p} />

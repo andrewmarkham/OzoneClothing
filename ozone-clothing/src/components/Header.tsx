@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ShoppingBag, Search } from 'lucide-react';
-import { Drawer, MiniCart } from '@jhoose-commerce/components';
+import { Drawer, MiniCart, useCart } from '@jhoose-commerce/components';
 import { useState } from 'react';
 import { Authentication } from './authentication';
 
@@ -10,6 +10,8 @@ import { Authentication } from './authentication';
 const Header = (props: { lang: string, labels: any }) => {
     const [showMiniCart, setShowMiniCart] = useState(false);
     const checkoutUrl = `/${props.lang}/checkout`
+    const { cart } = useCart();
+    const cartCount = cart?.forms[0].shipments?.reduce((total: number, item) => total + (item.lines.length|| 0), 0) || 0;
 
   return (
     <>
@@ -53,11 +55,16 @@ const Header = (props: { lang: string, labels: any }) => {
               <Search className="h-6 w-6" />
             </button>
 
-            <Authentication />
+            <Authentication locale={props.lang} />
  
-            <button onClick={() => setShowMiniCart(!showMiniCart)}>
+            <button onClick={() => setShowMiniCart(!showMiniCart)} className="relative">
               <ShoppingBag className="h-6 w-6" />
-          </button>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>

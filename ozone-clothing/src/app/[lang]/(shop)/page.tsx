@@ -1,6 +1,20 @@
 import ProductCarouselWithData from '@/components/ProductCarouselWithData';
+import { Locale } from '@/lib/dictionaries';
+import { getMarketDetails } from '@/lib/markets';
 
-export default async function Home() {
+export default async function Home({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  children,
+  params
+}: {
+  children: React.ReactNode;
+  params: Promise<{ lang: Locale }>;
+}) {
+
+  const {lang} = await params;
+  const marketDetails = await getMarketDetails(lang);
+
+  console.log(marketDetails)
   return (
     <div className="min-h-screen">
 
@@ -8,8 +22,8 @@ export default async function Home() {
         <h1 className="text-4xl font-bold">Welcome to Ozone Clothing</h1>
         <p className="mt-4 text-xl text-gray-600">Discover our latest collections</p>
         <div className="mt-8">
-          <ProductCarouselWithData heading='Latest Mens Products' marketId='USA' parentCategory={['mens']} />
-          <ProductCarouselWithData heading='Latest Womens Products'marketId='USA' parentCategory={['womens']} />
+          <ProductCarouselWithData heading='Latest Mens Products' market={marketDetails} parentCategory={['mens']} />
+          <ProductCarouselWithData heading='Latest Womens Products'market={marketDetails} parentCategory={['womens']} />
         </div>
       </main>
 

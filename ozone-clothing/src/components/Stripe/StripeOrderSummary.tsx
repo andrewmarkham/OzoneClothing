@@ -1,5 +1,6 @@
 'use server';
 import { Stripe } from "stripe";
+import { ClearCart } from "./ClearCart";
 
 export type StripeOrderSummaryProps = {
     cartId: number, 
@@ -30,10 +31,11 @@ export const StripeOrderSummary = async (props: StripeOrderSummaryProps) => {
 
     return (
         <main className="flex flex-col pt-24 px-24 w-full mb-4 justify-center align-middle">
-          <h1 className="text-4xl mb-4">Thankyou for your order</h1>
-          <pre>
-            {JSON.stringify(paymentIntent.metadata, null, 2)}
-        </pre>
-        <p>{paymentIntent.metadata["orderId"]}</p>
+            <h1 className="text-4xl mb-4">Thankyou for your order</h1>
+            <pre>
+                {JSON.stringify(paymentIntent.metadata, null, 2)}
+            </pre>
+            <ClearCart/>
+            <p>{paymentIntent.metadata["orderId"]}</p>
         </main>);
 };
